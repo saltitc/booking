@@ -134,4 +134,4 @@ class AppointmentConfirmationView(TitleMixin, TemplateView):
             appointment.save()
             return super().get(request, *args, **kwargs)
         else:
-            return HttpResponseRedirect(reverse('home'))
+            return HttpResponseRedirect(reverse('index'))
