@@ -21,8 +21,6 @@ class Feedback(models.Model):
             message='Введите корректный адрес электронной почты.'
         )])
     date = models.DateField(auto_now_add=True, verbose_name='Дата')
-    service_category = models.CharField(
-        max_length=2, verbose_name='Категория', choices=Appointment.SERVICE_CHOICES, default=Appointment.DEFAULT)
     feedback = models.TextField(
         verbose_name='Отзыв', validators=[MinLengthValidator(
             limit_value=5, message='Убедитесь, что поле с отзывом содержит не менее 5 символов.'

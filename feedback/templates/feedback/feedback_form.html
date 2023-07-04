@@ -84,37 +84,10 @@
                 <!-- Feedback form -->
                 <form method="post" action="{% url 'feedback:provide_feedback' %}" class="contact-form form-validate">
                     {% csrf_token %}
+                    <input type='hidden' name="first_name" value="{{ user.first_name }}" />
+                    <input type='hidden' name="last_name" value="{{ user.last_name }}" />
+                    <input type='hidden' name="email" value="{{ user.email }}" />
                     <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label class="form-control-label px-3" for="{{ form.first_name.id_for_label }}">Имя</label>
-                                {{ form.first_name }}
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label class="form-control-label px-3" for="{{ form.last_name.id_for_label }}">Фамилия</label>
-                                {{ form.last_name }}
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label class="form-control-label px-3" for="{{ form.email.id_for_label }}">Эл. почта</label>
-                                {{ form.email }}
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label class="form-control-label px-3" for="{{ form.service_category.id_for_label }}">
-                                    Категория услуг
-                                </label>
-                                {{ form.service_category }}
-                            </div>
-                        </div>
-
                         <div class="col-sm-12 mb-3">
                             <div class="form-group">
                                 <label class="form-control-label px-3" for="{{ form.review.id_for_label }}">Отзыв</label>
