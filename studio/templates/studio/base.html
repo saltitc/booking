@@ -25,7 +25,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'studio:home' %}">
+        <a class="navbar-brand" href="{% url 'studio:index' %}">
 
             <img src="https://www.freepnglogos.com/uploads/music-logo-black-and-white-png-21.png" width="25" height="25" alt=""/>
 <!--            <img src="{% static 'img/logo.png' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">-->
@@ -38,16 +38,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'studio:home'%}#team">Наша команда</a>
+                    <a class="nav-link" href="{% url 'studio:index'%}#team">Наша команда</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'studio:home'%}#services">Услуги</a>
+                    <a class="nav-link" href="{% url 'studio:index'%}#services">Услуги</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'reviews:feedback_list' %}">Отзывы</a>
+                    <a class="nav-link" href="{% url 'feedback:feedback_list' %}">Отзывы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'studio:home'%}#contact">Локация и контакты</a>
+                    <a class="nav-link" href="{% url 'studio:index'%}#contact">Локация и контакты</a>
                 </li>
 
                 {% if user.is_authenticated %}

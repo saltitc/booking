@@ -17,7 +17,7 @@ class FeedbackListView(TitleMixin, ListView):
 
     Template: feedback_list.html
     """
-    template_name = 'reviews/feedback_list.html'
+    template_name = 'feedback/feedback_list.html'
     model = Feedback
     context_object_name = "feeds"
     paginate_by = 3
@@ -50,7 +50,7 @@ class FeedbackFormView(TitleMixin, FormView):
         Template: feedback.html
     """
     form_class = FeedbackForm
-    template_name = 'reviews/feedback_form.html'
+    template_name = 'feedback/feedback_form.html'
     success_url = reverse_lazy('reviews:provide_feedback')
     title = 'Оставить отзыв'
 

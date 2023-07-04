@@ -47,7 +47,7 @@
                         </div>
                         <!-- End review statistics-->
                         <div class="graph-star-rating-footer text-center mt-3 mb-3">
-                                <a href="{% url 'reviews:provide_feedback' %}"
+                                <a href="{% url 'feedback:provide_feedback' %}"
                                    class="btn btn-outline-primary btn-sm">
                                     Оставить отзыв
                                 </a>
@@ -55,11 +55,11 @@
                     </div>
                     <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
                         <!-- Filters -->
-                        <a href="{% url 'reviews:rating' 'low' %}"
+                        <a href="{% url 'feedback:rating' 'low' %}"
                            class="btn btn-outline-primary btn-sm float-right"
                            style="margin-left: 8px;">Низкие
                         </a>
-                        <a href="{% url 'reviews:rating' 'high' %}"
+                        <a href="{% url 'feedback:rating' 'high' %}"
                            class="btn btn-outline-primary btn-sm float-right">Высокие
                         </a>
                         <!-- End filters-->

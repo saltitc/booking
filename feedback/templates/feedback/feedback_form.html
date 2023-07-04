@@ -82,7 +82,7 @@
                 <!-- End alerts -->
 
                 <!-- Feedback form -->
-                <form method="post" action="{% url 'reviews:provide_feedback' %}" class="contact-form form-validate">
+                <form method="post" action="{% url 'feedback:provide_feedback' %}" class="contact-form form-validate">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-sm-6 mb-3">
