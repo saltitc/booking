@@ -1,9 +1,29 @@
 from django.urls import path
 
-from studio.views import HomeTemplateView
+from studio.views import (HomeTemplateView, AppointmentFormView,
+                          ManageAppointmentsListView, AppointmentConfirmationView)
 
 app_name = 'studio'
 
 urlpatterns = [
     path('', HomeTemplateView.as_view(), name='index'),
+    path('make_an_appointment/', AppointmentFormView.as_view(), name='appointment'),
+    path('manage_appointments/', ManageAppointmentsListView.as_view(), name='manage'),
+    path('confirm/<str:email>/<uuid:code>/', AppointmentConfirmationView.as_view(), name='appointment_confirmation'),
+
+    path(
+        'manage_appointments/category/<str:category_abbreviation>/',
+        ManageAppointmentsListView.as_view(),
+        name='service_category'
+    ),
+    path(
+        'manage_appointments/accepted/<int:is_accepted>/',
+        ManageAppointmentsListView.as_view(),
+        name='is_accepted'
+    ),
+    path(
+        'manage_appointments/relevance/<int:is_relevant>/',
+        ManageAppointmentsListView.as_view(),
+        name='is_relevant'
+    ),
 ]

@@ -29,25 +29,20 @@ class AppointmentForm(ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'class': 'form-control-label px-3',
-                'placeholder': "Введите ваше имя",
-                'onblur': 'validate(1)'}),
+                'placeholder': "Введите ваше имя"}),
             'last_name': forms.TextInput(attrs={
                 'class': 'form-control-label px-3',
-                'placeholder': "Введите вашу фамилию",
-                'onblur': 'validate(2)'}),
+                'placeholder': "Введите вашу фамилию"}),
             'email': forms.EmailInput(attrs={
                 'class': 'form-control-label px-3',
-                'placeholder': "example@gmail.com",
-                'onblur': 'validate(3)'}),
+                'placeholder': "example@gmail.com"}),
             'phone': forms.TextInput(attrs={
                 'class': 'form-control-label px-3',
-                'placeholder': "8-999-999-99-99",
-                'onblur': 'validate(4)'}),
+                'placeholder': "8-999-999-99-99"}),
             'message': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': "Ваши пожелания по оказанию услуги",
-                'rows': "5",
-                'onblur': 'validate(4)'}),
+                'rows': "5"}),
             'date': DateInput(),
             'service_category': forms.Select(choices=Appointment.SERVICE_CHOICES, attrs={
                 'class': 'form-control',

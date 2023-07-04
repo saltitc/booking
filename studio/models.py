@@ -1,6 +1,11 @@
 from django.db import models
 from django.core.validators import EmailValidator, RegexValidator, MinLengthValidator
+from django.template.loader import get_template
+from django.core.mail import EmailMessage
 import datetime
+from django.urls import reverse
+from django.conf import settings
+from django.utils.timezone import now
 
 
 class Appointment(models.Model):
@@ -72,3 +77,51 @@ class Appointment(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+
+class AppointmentConfirmation(models.Model):
+    """
+    Database table model for appointment confirmation
+
+    fields: code, appointment, created, expiration
+    """
+    code = models.UUIDField(unique=True)
+    appointment = models.ForeignKey(to=Appointment, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    expiration = models.DateTimeField()
+
+    def __str__(self):
+        return f'Подтверждение записи ({self.appointment})'
+
+    def send_confirmation_email(self):
+        """
+        Sends an email with a confirmation link
+        """
+        # generates a confirmation link
+        link = reverse('studio:appointment_confirmation', kwargs={
+            'email': self.appointment.email,
+            'code': self.code
+        })
+        # render data
+        data = {
+            'first_name': self.appointment.first_name,
+            'dt': self.appointment.date,
+            'tm': self.appointment.time,
+            'service': self.appointment.get_service_category_display,
+            'link_for_confirmation': f"{settings.DOMAIN_NAME}{link}"
+        }
+        # renders html template to send to email
+        message = get_template('email_response.html').render(data)
+
+        # create and send email
+        email = EmailMessage(
+            subject=f'Подтверждение записи',
+            body=message,
+            from_email=f'Студия <{settings.EMAIL_HOST_USER}>',
+            to=[self.appointment.email]
+        )
+        email.content_subtype = 'html'
+        email.send()
+
+    def is_expired(self) -> bool:
+        return now() >= self.expiration
