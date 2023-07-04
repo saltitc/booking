@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 from studio.views import (HomeTemplateView, AppointmentFormView,
                           ManageAppointmentsListView, AppointmentConfirmationView)
@@ -7,7 +8,7 @@ app_name = 'studio'
 
 urlpatterns = [
     path('', HomeTemplateView.as_view(), name='index'),
-    path('make_an_appointment/', AppointmentFormView.as_view(), name='appointment'),
+    path('make_an_appointment/', login_required(AppointmentFormView.as_view()), name='appointment'),
     path('manage_appointments/', ManageAppointmentsListView.as_view(), name='manage'),
     path('confirm/<str:email>/<uuid:code>/', AppointmentConfirmationView.as_view(), name='appointment_confirmation'),
 
