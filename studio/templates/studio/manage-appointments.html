@@ -1,0 +1,174 @@
+{% extends 'studio/base.html' %}
+{% load static %}
+
+{% block css %}
+     <link rel="stylesheet" href="{% static 'css/manage-appointments.css' %}"/>
+{% endblock css %}
+
+{% block content %}
+
+
+    <div class="container mt-5">
+        <div class="col-11 text-center mt-4 mb-4">
+            <h3>
+                Администрирование заявок
+            </h3>
+        </div>
+        <!-- Filters -->
+        <div class="row">
+            <div class="col-lg-3">
+                <h5 style="text-align: center;">Категория услуги</h5>
+                <div class="list-group">
+                    {% for abbr, descr in categories %}
+                        <a href="{% url 'studio:service_category' abbr %}"
+                           class="list-group-item">
+                            {{ descr }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <h5 style="text-align: center;">Статус заявки</h5>
+                <div class="list-group">
+                    <a href="{% url 'studio:is_accepted' 0 %}" class="list-group-item">
+                        Не принятые
+                    </a>
+                    <a href="{% url 'studio:is_accepted' 1 %}" class="list-group-item">
+                        Принятые
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <h5 style="text-align: center;">Актуальность заявки</h5>
+                <div class="list-group">
+                    <a href="{% url 'studio:is_relevant' 1 %}" class="list-group-item">
+                        Актуальные
+                    </a>
+                    <a href="{% url 'studio:is_relevant' 0 %}" class="list-group-item">
+                        Неактуальные
+                    </a>
+                </div>
+            </div>
+
+            <a href="{% url 'studio:manage' %}" style="margin-top: 33px; margin-left: 20px; text-decoration: none">
+                <input class="btn-block btn-primary form-control" type="button" value="Сбросить фильтры">
+            </a>
+        </div>
+        <!-- End filters -->
+        <br>
+        <!-- Alerts -->
+        {% if messages or form.non_field_errors or form.errors %}
+            <div class="alert
+                 {% if messages %} alert-success {% else %} alert-warning {% endif %}
+                 alert-dismissible fade show" role="alert">
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% elif form.non_field_errors %}
+                    {{ form.non_field_errors }}
+                {% else %}
+                    {% for field in form %}
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+        <!-- End alerts -->
+
+        <div class="row">
+            {% for appointment in appointments %}
+                <!-- Appointment card -->
+                <div class="col-lg-4">
+                    <div class="card card-margin">
+                        <div class="card-header no-border">
+                            <h5 class="card-title">{{ appointment.first_name }} {{ appointment.last_name }}</h5>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="widget-49">
+                                <div class="widget-49-title-wrapper">
+                                    <div class="widget-49-date-primary">
+                                        <span class="widget-49-date-day">{{ appointment.sent_date|date:"d" }}</span>
+                                        <span class="widget-49-date-month">{{ appointment.sent_date|date:"M" }}</span>
+                                    </div>
+                                    <div class="widget-49-meeting-info">
+                                        <span class="widget-49-pro-title">{{ appointment.email }}</span>
+                                        <span class="widget-49-meeting-time">{{ appointment.phone }}</span>
+                                        <span class="widget-49-meeting-time">Дата записи: {{ appointment.date }}</span>
+                                        <span class="widget-49-meeting-time">
+                                            Услуга: {{ appointment.get_service_category_display }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="widget-49-meeting-points">
+                                    <span>{{ appointment.message }}</span>
+                                </div>
+                                <hr class="w-100">
+                                {% if appointment.accepted == False %}
+                                <form  method="post" action="{% url 'studio:manage' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="date" name="date" class="form-control mb-2"
+                                            placeholder="dd-mm-yyyy" value=""
+                                            min="1997-01-01" max="2030-12-31">
+                                        <input type="time" name="time" class="form-control mb-2"
+                                            placeholder="hh-mm" value="12:00"
+                                            min="09:00" max="18:00">
+                                        <input hidden="true" name="appointment-id" value="{{appointment.id}}">
+                                        <input class="btn-block btn-primary form-control" type="submit" value="Принять">
+                                    </div>
+                                </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End appointment card -->
+            {% endfor %}
+        </div>
+        <!-- Pagination -->
+        {% if is_paginated %}
+        <div class="wrapper">
+            <nav aria-label="Page navigation example" style="margin-bottom: 30px;">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.previous_page_number}}">
+                            Предыдущая
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for number in page_obj.paginator.page_range %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{number}}">
+                                {{ number }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{page_obj.next_page_number}}">
+                            Следующая
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+        {% endif %}
+        <!-- Endpagination -->
+    </div>
+{% endblock content %}

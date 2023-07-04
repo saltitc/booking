@@ -1,0 +1,232 @@
+{% extends 'studio/base.html' %}
+{% load static %}
+
+
+{% block cta %}
+<div class="container hero" style="padding-top: 20%;">
+    <div class="row">
+        <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
+            <h1>Lorem ipsum</h1>
+            <p> Etiam lobortis pulvinar elit sit amet rhoncus.
+                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+            <a href="{% url 'studio:appointment' %}" class="btn btn-light btn-lg action-button" type="button">
+                Оформить запись
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<!-- Team section -->
+<section class="container py-5" style="margin-block:200px;" id="team">
+    <div class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4">Наша команда</h1>
+            <p class="lead">
+                Мастера своего дела, помогут вам в решении ваших вопросов
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row text-center">
+            <!-- Team item -->
+            <div class="col-xl-3 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team1.jpeg' %}" alt=""
+                                                                       class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Николай</h5>
+                    <span class="small text-uppercase text-muted">Звукорежиссер</span>
+                </div>
+            </div>
+            <!-- End -->
+
+            <!-- Team item -->
+            <div class="col-xl-3 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team1.jpeg' %}" alt=""
+                                                                       class=" mh-100 rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Алексей</h5>
+                    <span class="small text-uppercase text-muted">Мастеринг-инженер</span>
+                </div>
+            </div>
+            <!-- End -->
+
+            <!-- Team item -->
+            <div class="col-xl-3 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team1.jpeg' %}" alt=""
+                                                                       class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Михаил</h5>
+                    <span class="small text-uppercase text-muted">Продюссер</span>
+                </div>
+            </div>
+            <!-- End -->
+
+            <!-- Team item -->
+            <div class="col-xl-3 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'img/team1.jpeg' %}" alt=""
+                                                                       class=" mh-100img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Иван</h5>
+                    <span class="small text-uppercase text-muted">Миксинг-инженер</span>
+                </div>
+            </div>
+            <!-- End -->
+        </div>
+    </div>
+</section>
+<!-- End team section -->
+
+<!-- Services section -->
+<section class="container py-5" id="services" style="margin-bottom: 10%; margin-block:200px;">
+    <div class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="display-4">Услуги</h1>
+            <p class="lead">Мы оказываем услуги наилучшего качества</p>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 80px;">
+        <div class="row">
+            <!-- Service 1 -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-0 shadow" style="padding: 10px;">
+                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">Запись вокала</h5>
+                        <div class="card-text text-black-50">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 2 -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-0 shadow" style="padding: 10px;">
+                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">Тюнинг вокала</h5>
+                        <div class="card-text text-black-50">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 3 -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-0 shadow" style="padding: 10px;">
+                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">Мастеринг</h5>
+                        <div class="card-text text-black-50">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Service 4 -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-0 shadow" style="padding: 10px;">
+                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <div class="card-body text-center">
+                        <h5 class="card-title mb-0">Написание текста</h5>
+                        <div class="card-text text-black-50">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End services section -->
+
+<!-- Studio information -->
+<section id="contact" class="card m-4 p-4" style="bottom: 30px;">
+    <div class="container">
+        <div class="row text-center">
+            <!-- Location -->
+            <div class="col-sm-6">
+                <div class="contact-detail-box">
+                    <i class="fa fa-map-marker fa-3x text-colored"></i>
+                    <h4>Наша локация</h4>
+
+                    <address>
+                        г. Москва<br>
+                        Большой Московрецкий мост<br>
+                    </address>
+                </div>
+            </div>
+            <!-- End location -->
+
+            <!-- Contacts -->
+            <div class="col-sm-6">
+                <div class="contact-detail-box">
+                    <i class="far fa-envelope text-colored fa-3x"></i>
+                    <h4>Связь с нами</h4>
+                    <abbr title="Phone">Телефон:</abbr> +7 (123)-456-78-90<br>
+                    Эл. почта: <a href="mailto:studioemail@email.com" class="text-muted">studioemail@email.com</a>
+                </div>
+            </div>
+            <!-- End contacts -->
+        </div>
+
+        <div class="row">
+            <!-- Google Maps location -->
+            <div class="col-sm-6">
+                <div class="contact-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2579.3350574462374!2d37.6231074906801!3d55.75083214242878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54a57ccf6bd87%3A0xb91a21e09ec2dea1!2z0JHQvtC70YzRiNC-0Lkg0JzQvtGB0LrQstC-0YDQtdGG0LrQuNC5INC80L7RgdGC!5e0!3m2!1sru!2sru!4v1687601837625!5m2!1sru!2sru"
+                            frameborder="0" scrolling="no" marginheight="0"
+                            marginwidth="0" style="width: 100%; height: 360px;">
+                    </iframe>
+
+                </div>
+            </div>
+            <!-- End Google Maps location -->
+
+            <!-- Contacts -->
+            <div class="col-sm-6">
+
+                    <div class="group">
+                        <h5>Директор:</h5>
+                        <p>
+                            Телефон: +7-999-999-99-99
+                            <br>
+                            Эл. почта: studiodirector@example.com
+                        </p>
+                    </div>
+
+                    <div class="group">
+                        <h5>Менеджер:</h5>
+                        <p>
+                            Телефон: +7-999-999-99-99
+                            <br>
+                            Эл. почта: studiomanager@example.com
+                        </p>
+                    </div>
+
+                    <div class="group">
+                        <h5>Звукорежиссер:</h5>
+                        <p>
+                            Телефон: +7-999-999-99-99
+                            <br>
+                            Эл. почта: studiosoundengineer@example.com
+                        </p>
+                    </div>
+
+                    <div class="group">
+                        <h5>По вопросам качества:</h5>
+                        <p>
+                            Телефон: +7-999-999-99-99
+                            <br>
+                            Эл. почта: studiosupport@example.com
+                        </p>
+                    </div>
+
+            </div>
+            <!-- End contacts -->
+
+        </div>
+    </div>
+</section>
+<!-- End studio information -->
+
+{% endblock %}

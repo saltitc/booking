@@ -1,0 +1,126 @@
+{% extends 'studio/base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/appointment.css' %}"/>
+{% endblock css %}
+
+
+{% block content %}
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>
+                    Оформить заявку на получение услуг
+                </h3>
+                <p class="blue-text">Заполните форму для контакта с нами и получения услуги</p>
+                <div class="card">
+
+                    <!-- Alert -->
+                    {% if messages or form.non_field_errors or form.errors %}
+                        <div class="alert
+                            {% if messages %} alert-success {% else %} alert-warning {% endif %}
+                             alert-dismissible fade show" role="alert">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                {% elif form.non_field_errors %}
+                                    {{ form.non_field_errors }}
+                                {% else %}
+                                    {% for field in form %}
+                                        {% if field.errors %}
+                                             {{ field.errors }}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                    {% endif %}
+                    <!-- Endalert -->
+
+                    <!-- Appointment form -->
+                    <form class="form-card" method="post" action="{% url 'studio:appointment' %}" >
+                        {% csrf_token %}
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.first_name.id_for_label }}">
+                                    Имя<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.first_name }}
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.last_name.id_for_label }}">
+                                    Фамилия<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.email.id_for_label }}">
+                                    Электронная почта<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.email }}
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.phone.id_for_label }}">
+                                    Номер телефона<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.phone }}
+                            </div>
+
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.date.id_for_label }}">
+                                    Дата<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.date }}
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.service_category.id_for_label }}">
+                                    Категория услуг<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.service_category }}
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-12 flex-column d-flex">
+                                <label class="form-control-label px-3" for="{{ form.message.id_for_label }}">
+                                    Комментарий<span class="text-danger"> *</span>
+                                </label>
+                                {{ form.message }}
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6">
+                                <button type="submit" class="btn-block btn-primary">
+                                    Отправить заявку
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Endform -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+
+
+
+
