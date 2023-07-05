@@ -57,7 +57,7 @@
 
             <div class="col-lg-7 contact-form__wrapper p-5 order-lg-1">
                 <!-- Alerts -->
-                {% if messages or form.non_field_errors or form.errors %}
+                {% if messages or form.errors %}
                     <div class="alert
                          {% if messages %} alert-success {% else %} alert-warning {% endif %}
                          alert-dismissible fade show" role="alert">

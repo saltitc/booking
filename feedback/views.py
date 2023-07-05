@@ -52,7 +52,7 @@ class FeedbackFormView(TitleMixin, FormView):
     """
     form_class = FeedbackForm
     template_name = 'feedback/feedback_form.html'
-    success_url = reverse_lazy('feedback:provide_feedback')
+    success_url = reverse_lazy('feedback:feedback_list')
     title = 'Оставить отзыв'
 
     def form_valid(self, form):
