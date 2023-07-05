@@ -5,19 +5,20 @@ from .models import Appointment, AppointmentConfirmation
 @admin.register(Appointment)
 class AppointmentAdmin(admin.ModelAdmin):
     list_display = (
-        'first_name', 'email', 'service_category',
+        'user', 'first_name', 'email', 'service_category',
         'accepted', 'is_confirmed', 'date', 'time'
     )
     fieldsets = (
         ('Персональная информация', {
-            'fields': (('first_name', 'last_name'), ('email', 'phone'))
+            'fields': ('user', ('first_name', 'last_name'), ('email', 'phone'))
         }),
         ('Техническая информация', {
             'fields': (
-            'service_category', 'message', ('date', 'time'), 'is_confirmed', 'accepted', 'accepted_date', 'sent_date')
+                'service_category', 'message', ('date', 'time'),
+                'is_confirmed', 'accepted', 'accepted_date', 'sent_date')
         }),
     )
-    readonly_fields = ('sent_date', 'accepted_date', 'accepted', 'is_confirmed')
+    readonly_fields = ('user', 'sent_date', 'accepted_date', 'accepted', 'is_confirmed')
     search_fields = ('email', 'phone')
     ordering = ('-date',)
     list_per_page = 15

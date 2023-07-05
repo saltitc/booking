@@ -6,7 +6,7 @@ import datetime
 from django.urls import reverse
 from django.conf import settings
 from django.utils.timezone import now
-
+from users.models import User
 
 class Appointment(models.Model):
     """
@@ -29,6 +29,7 @@ class Appointment(models.Model):
         (GHOSTWRITING, 'Написание текста'),
     ]
 
+    user = models.ForeignKey(to=User, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     first_name = models.CharField(
         max_length=15, verbose_name='Имя', validators=[MinLengthValidator(
             limit_value=2, message='Убедитесь, что поле имени содержит не менее 2 символов.'
@@ -111,7 +112,7 @@ class AppointmentConfirmation(models.Model):
             'link_for_confirmation': f"{settings.DOMAIN_NAME}{link}"
         }
         # renders html template to send to email
-        message = get_template('email_response.html').render(data)
+        message = get_template('studio/email_response.html').render(data)
 
         # create and send email
         email = EmailMessage(

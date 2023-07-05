@@ -59,7 +59,7 @@
         <!-- End filters -->
         <br>
         <!-- Alerts -->
-        {% if messages or form.non_field_errors or form.errors %}
+        {% if messages or form.errors %}
             <div class="alert
                  {% if messages %} alert-success {% else %} alert-warning {% endif %}
                  alert-dismissible fade show" role="alert">
@@ -67,8 +67,6 @@
                     {% for message in messages %}
                         {{ message }}
                     {% endfor %}
-                {% elif form.non_field_errors %}
-                    {{ form.non_field_errors }}
                 {% else %}
                     {% for field in form %}
                         {% if field.errors %}
@@ -95,13 +93,15 @@
                             <div class="widget-49">
                                 <div class="widget-49-title-wrapper">
                                     <div class="widget-49-date-primary">
-                                        <span class="widget-49-date-day">{{ appointment.sent_date|date:"d" }}</span>
-                                        <span class="widget-49-date-month">{{ appointment.sent_date|date:"M" }}</span>
+                                        <span class="widget-49-date-day">{{ appointment.date|date:"d" }}</span>
+                                        <span class="widget-49-date-month">{{ appointment.date|date:"M" }}</span>
                                     </div>
                                     <div class="widget-49-meeting-info">
                                         <span class="widget-49-pro-title">{{ appointment.email }}</span>
                                         <span class="widget-49-meeting-time">{{ appointment.phone }}</span>
-                                        <span class="widget-49-meeting-time">Дата записи: {{ appointment.date }}</span>
+                                        <span class="widget-49-meeting-time">
+                                            Заявка отправлена: {{ appointment.sent_date|date:"j M Y" }}
+                                        </span>
                                         <span class="widget-49-meeting-time">
                                             Услуга: {{ appointment.get_service_category_display }}
                                         </span>
@@ -121,7 +121,7 @@
                                         <input type="time" name="time" class="form-control mb-2"
                                             placeholder="hh-mm" value="12:00"
                                             min="09:00" max="18:00">
-                                        <input hidden="true" name="appointment-id" value="{{appointment.id}}">
+                                        <input hidden="true" name="appointment-id" value="{{ appointment.id }}">
                                         <input class="btn-block btn-primary form-control" type="submit" value="Принять">
                                     </div>
                                 </form>

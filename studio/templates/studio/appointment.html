@@ -18,7 +18,7 @@
                 <div class="card">
 
                     <!-- Alert -->
-                    {% if messages or form.non_field_errors or form.errors %}
+                    {% if messages or form.errors %}
                         <div class="alert
                             {% if messages %} alert-success {% else %} alert-warning {% endif %}
                              alert-dismissible fade show" role="alert">
@@ -26,8 +26,6 @@
                                     {% for message in messages %}
                                         {{ message }}
                                     {% endfor %}
-                                {% elif form.non_field_errors %}
-                                    {{ form.non_field_errors }}
                                 {% else %}
                                     {% for field in form %}
                                         {% if field.errors %}
@@ -45,6 +43,7 @@
                     <!-- Appointment form -->
                     <form class="form-card" method="post" action="{% url 'studio:appointment' %}" >
                         {% csrf_token %}
+                        <input type='hidden' name="user" value="{{ user.id }}" />
                         <input type='hidden' name="first_name" value="{{ user.first_name }}" />
                         <input type='hidden' name="last_name" value="{{ user.last_name }}" />
                         <input type='hidden' name="email" value="{{ user.email }}" />
