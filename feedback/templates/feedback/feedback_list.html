@@ -46,12 +46,89 @@
                             {% endfor %}
                         </div>
                         <!-- End review statistics-->
+
+                        {% if not user.feedback %}
+                        <!-- Provide feedback button -->
                         <div class="graph-star-rating-footer text-center mt-3 mb-3">
                                 <a href="{% url 'feedback:provide_feedback' %}"
                                    class="btn btn-outline-primary btn-sm">
                                     Оставить отзыв
                                 </a>
                         </div>
+                        <!-- End of provide feedback button -->
+                        {% else %}
+                        <!-- User's feedback -->
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">Оставленный вами отзыв</h5>
+                                <div class="reviews-members pt-4 pb-4">
+                                    <div class="media">
+                                        <img alt="Generic placeholder image"
+                                             src="{% static 'img/team1.jpeg' %}"
+                                             class="mr-3 rounded-pill">
+                                        <div class="media-body">
+                                            <div class="reviews-members-header">
+                                                <h6 class="mb-1">
+                                                    {{ user.first_name }} {{ user.last_name }}
+                                                </h6>
+                                                <p class="text-gray">
+                                                    {{ user.feedback.date }}
+                                                </p>
+                                                <div class="rating-mini">
+                                                    {% for _ in user.feedback.rating|range %}
+                                                    <span class="active"></span>
+                                                    {% endfor %}
+                                                    {% for _ in user.feedback.rating|range:5 %}
+                                                    <span></span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <div class="reviews-members-body">
+                                                <p>{{ user.feedback.feedback }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-danger"
+                                        data-target="#deleteModal" data-toggle="modal">
+                                    Удалить отзыв
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Удаление отзыва</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Вы действительно хотите удалить ваш отзыв?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form method="POST"
+                                                      action="{% url 'feedback:delete_feedback' user.feedback.id%}"
+                                                      id="delete">{% csrf_token %}
+                                                    <input type="hidden" value="DELETE">
+                                                </form>
+                                                <button type="button" class="btn btn-secondary"
+                                                        id="close-modal" data-dismiss="modal">
+                                                    Нет
+                                                </button>
+                                                <button type="submit" class="btn btn-danger" form="delete">
+                                                    Да
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End of Modal -->
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- End of user's feedback -->
                     </div>
                     <div class="bg-white rounded shadow-sm p-4 mb-4 restaurant-detailed-ratings-and-reviews">
                         <!-- Filters -->
