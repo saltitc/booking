@@ -42,7 +42,7 @@ class AppointmentFormView(TitleMixin, FormView):
         # shows a message about the successful receipt of the user's application
         messages.success(
             self.request,
-            f'{self.request.POST["first_name"]}, заявка отправлена. Ответ придет на указанную электронную почту')
+            f'{self.request.POST["first_name"]}, заявка отправлена. Ответ придет на вашу электронную почту')
 
         # creates an Appointment object
         form.save()

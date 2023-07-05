@@ -65,8 +65,6 @@
                             {% for message in messages %}
                                 {{ message }}
                             {% endfor %}
-                        {% elif form.non_field_errors %}
-                            {{ form.non_field_errors }}
                         {% else %}
                             {% for field in form %}
                                 {% if field.errors %}
@@ -84,6 +82,7 @@
                 <!-- Feedback form -->
                 <form method="post" action="{% url 'feedback:provide_feedback' %}" class="contact-form form-validate">
                     {% csrf_token %}
+                    <input type='hidden' name="user" value="{{ user.id }}" />
                     <input type='hidden' name="first_name" value="{{ user.first_name }}" />
                     <input type='hidden' name="last_name" value="{{ user.last_name }}" />
                     <input type='hidden' name="email" value="{{ user.email }}" />

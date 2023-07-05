@@ -1,13 +1,12 @@
 from django.forms import ModelForm
 from django import forms
 from .models import Feedback
-from studio.models import Appointment
 
 
 class FeedbackForm(ModelForm):
     class Meta:
         model = Feedback
-        fields = ('rating', 'feedback')
+        fields = ('user', 'first_name', 'last_name', 'email', 'rating', 'feedback')
         labels = {
             'rating': 'Оценка',
             'feedback': 'Отзыв',
@@ -25,3 +24,8 @@ class FeedbackForm(ModelForm):
                 'placeholder': "Ваш отзыв",
                 'rows': "5",
             })}
+        error_messages = {
+            'user': {
+                'unique': "Вы уже оставили отзыв",
+            },
+        }

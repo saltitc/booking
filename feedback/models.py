@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import EmailValidator, MinLengthValidator
-from studio.models import Appointment
+from users.models import User
 from itertools import tee
 
 
@@ -8,6 +8,7 @@ class Feedback(models.Model):
     # class Meta:
     #     ordering = ['-date']
 
+    user = models.OneToOneField(to=User, null=True, blank=True, on_delete=models.CASCADE, verbose_name='Пользователь')
     first_name = models.CharField(
         max_length=15, verbose_name='Имя', validators=[MinLengthValidator(
             limit_value=2, message='Убедитесь, что поле имени содержит не менее 2 символов.'

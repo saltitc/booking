@@ -14,7 +14,7 @@
                 <h3>
                     Оформить заявку на получение услуг
                 </h3>
-                <p class="blue-text">Заполните форму для контакта с нами и получения услуги</p>
+                <p class="blue-text">{{ user.first_name }}, заполните форму, выбрав дату и категорию услуги</p>
                 <div class="card">
 
                     <!-- Alert -->
@@ -45,39 +45,11 @@
                     <!-- Appointment form -->
                     <form class="form-card" method="post" action="{% url 'studio:appointment' %}" >
                         {% csrf_token %}
-                        <div class="row justify-content-between text-left">
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3" for="{{ form.first_name.id_for_label }}">
-                                    Имя<span class="text-danger"> *</span>
-                                </label>
-                                {{ form.first_name }}
-                            </div>
+                        <input type='hidden' name="first_name" value="{{ user.first_name }}" />
+                        <input type='hidden' name="last_name" value="{{ user.last_name }}" />
+                        <input type='hidden' name="email" value="{{ user.email }}" />
+                        <input type='hidden' name="phone" value="{{ user.phone }}" />
 
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3" for="{{ form.last_name.id_for_label }}">
-                                    Фамилия<span class="text-danger"> *</span>
-                                </label>
-                                {{ form.last_name }}
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-between text-left">
-
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3" for="{{ form.email.id_for_label }}">
-                                    Электронная почта<span class="text-danger"> *</span>
-                                </label>
-                                {{ form.email }}
-                            </div>
-
-                            <div class="form-group col-sm-6 flex-column d-flex">
-                                <label class="form-control-label px-3" for="{{ form.phone.id_for_label }}">
-                                    Номер телефона<span class="text-danger"> *</span>
-                                </label>
-                                {{ form.phone }}
-                            </div>
-
-                        </div>
 
                         <div class="row justify-content-between text-left">
 
