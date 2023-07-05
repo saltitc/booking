@@ -9,7 +9,7 @@
             <h1>Lorem ipsum</h1>
             <p> Etiam lobortis pulvinar elit sit amet rhoncus.
                 Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
-            <a href="{% url 'studio:appointment' %}" class="btn btn-light btn-lg action-button" type="button">
+            <a href="{% url 'studio:appointment' %}" class="btn btn-dark btn-lg action-button" type="button">
                 Оформить запись
             </a>
         </div>
@@ -21,7 +21,7 @@
 {% block content %}
 <!-- Team section -->
 <section class="container py-5" style="margin-block:200px;" id="team">
-    <div class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
+    <div class="bg-light text-center py-5 mb-4" style="border-radius: 10px;">
         <div class="col-lg-8 mx-auto">
             <h1 class="display-4">Наша команда</h1>
             <p class="lead">
@@ -78,18 +78,18 @@
 
 <!-- Services section -->
 <section class="container py-5" id="services" style="margin-bottom: 10%; margin-block:200px;">
-    <div class="bg-info text-center py-5 mb-4" style="border-radius: 10px;">
+    <div class="bg-light text-center py-5 mb-4" style="border-radius: 10px;">
         <div class="col-lg-8 mx-auto">
             <h1 class="display-4">Услуги</h1>
             <p class="lead">Мы оказываем услуги наилучшего качества</p>
         </div>
     </div>
-    <div class="container" style="margin-top: 80px;">
+    <div class="container" style="margin-top: 20px;">
         <div class="row">
             <!-- Service 1 -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-0 shadow" style="padding: 10px;">
-                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <img src="{% static 'img/service1.jpeg' %}" class="card-img-top" width="50" height="200">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Запись вокала</h5>
                         <div class="card-text text-black-50">
@@ -101,7 +101,7 @@
             <!-- Service 2 -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-0 shadow" style="padding: 10px;">
-                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <img src="{% static 'img/service2.jpeg' %}" class="card-img-top" width="50" height="200">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Тюнинг вокала</h5>
                         <div class="card-text text-black-50">
@@ -113,7 +113,7 @@
             <!-- Service 3 -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-0 shadow" style="padding: 10px;">
-                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <img src="{% static 'img/service3.jpeg' %}" class="card-img-top" width="50" height="200">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Мастеринг</h5>
                         <div class="card-text text-black-50">
@@ -125,7 +125,7 @@
             <!-- Service 4 -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card border-0 shadow" style="padding: 10px;">
-                    <img src="{% static 'img/service1.png' %}" class="card-img-top" alt="...">
+                    <img src="{% static 'img/service4.jpeg' %}" class="card-img-top" width="50" height="200">
                     <div class="card-body text-center">
                         <h5 class="card-title mb-0">Написание текста</h5>
                         <div class="card-text text-black-50">
