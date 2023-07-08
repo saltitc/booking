@@ -4,7 +4,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from .models import Appointment, AppointmentConfirmation
 from django.views.generic import ListView
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, DeleteView
 from common.views import TitleMixin
 from .forms import AppointmentForm
 import datetime
@@ -135,3 +135,11 @@ class AppointmentConfirmationView(TitleMixin, TemplateView):
             return super().get(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(reverse('index'))
+
+
+class AppointmentDeleteView(DeleteView):
+    model = Appointment
+
+    def get_success_url(self):
+        user = self.object.user
+        return reverse_lazy('users:profile', kwargs={'pk': user.id})

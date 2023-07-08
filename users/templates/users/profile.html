@@ -105,6 +105,43 @@
                                     Статус заявки: <i class="fas fa-user-clock"></i> (заявка в обработке)
                                 </li>
                             {% endif %}
+
+                            <button type="button" class="btn btn-danger"
+                                    data-target="#deleteModal" data-toggle="modal">
+                                Удалить заявку
+                            </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Удалить заявку</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Вы действительно хотите удалить заявку?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form method="POST"
+                                                      action="{% url 'studio:delete_appointment' appointment.id %}"
+                                                      id="delete">{% csrf_token %}
+                                                    <input type="hidden" value="DELETE">
+                                                </form>
+                                                <button type="button" class="btn btn-secondary"
+                                                        id="close-modal" data-dismiss="modal">
+                                                    Нет
+                                                </button>
+                                                <button type="submit" class="btn btn-danger" form="delete">
+                                                    Да
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End of Modal -->
                         </ul>
                     </div>
                 </div>

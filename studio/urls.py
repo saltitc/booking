@@ -1,8 +1,8 @@
 from django.urls import path
 from django.contrib.auth.decorators import login_required
 
-from studio.views import (HomeTemplateView, AppointmentFormView,
-                          ManageAppointmentsListView, AppointmentConfirmationView)
+from studio.views import (HomeTemplateView, AppointmentFormView, ManageAppointmentsListView,
+                          AppointmentConfirmationView, AppointmentDeleteView)
 
 app_name = 'studio'
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('make_an_appointment/', login_required(AppointmentFormView.as_view()), name='appointment'),
     path('manage_appointments/', ManageAppointmentsListView.as_view(), name='manage'),
     path('confirm/<str:email>/<uuid:code>/', AppointmentConfirmationView.as_view(), name='appointment_confirmation'),
+    path('<pk>/delete/', AppointmentDeleteView.as_view(), name='delete_appointment'),
 
     path(
         'manage_appointments/category/<str:category_abbreviation>/',
