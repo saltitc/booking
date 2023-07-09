@@ -13,15 +13,23 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-7">
+                        <!-- Errors -->
                         {% if form.errors %}
                         <div class="alert alert-warning alert-dismissible fade show" role="alert"
                              style="margin-top: 50px;">
-                            {{ form.errors }}
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    {{ field.errors }}
+                                {% endif %}
+                            {% endfor %}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         {% endif %}
+                        <!-- End of errors -->
+
+                        <!-- Registration form block -->
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Создать аккаунт</h3>
                             </div>
@@ -104,6 +112,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- End of registration form block -->
                     </div>
                 </div>
             </div>

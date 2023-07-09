@@ -17,7 +17,7 @@
                 <p class="blue-text">{{ user.first_name }}, заполните форму, выбрав дату и категорию услуги</p>
                 <div class="card">
 
-                    <!-- Alert -->
+                    <!-- Alerts -->
                     {% if messages or form.errors %}
                         <div class="alert
                             {% if messages %} alert-success {% else %} alert-warning {% endif %}
@@ -38,7 +38,7 @@
                                 </button>
                             </div>
                     {% endif %}
-                    <!-- Endalert -->
+                    <!-- End alerts -->
 
                     <!-- Appointment form -->
                     <form class="form-card" method="post" action="{% url 'studio:appointment' %}" >
@@ -84,7 +84,7 @@
                             </div>
                         </div>
                     </form>
-                    <!-- Endform -->
+                    <!-- End form -->
                 </div>
             </div>
         </div>

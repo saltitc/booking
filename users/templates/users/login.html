@@ -12,6 +12,8 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5">
+
+                        <!-- Alerts -->
                         {% if messages or form.non_field_errors %}
                         <div class="alert
                                 {% if messages %} alert-success {% else %} alert-warning {% endif %}
@@ -28,10 +30,12 @@
                             </button>
                         </div>
                         {% endif %}
+                        <!-- End alerts -->
                         <div class="card shadow-lg border-0 rounded-lg mt-5">
                             <div class="card-header"><h3 class="text-center font-weight-light my-4">Авторизация</h3>
                             </div>
                             <div class="card-body">
+                                <!-- Authorization form -->
                                 <form action="{% url 'users:login' %}" method="post">
                                     {% csrf_token %}
                                     <div class="form-group">
@@ -52,6 +56,7 @@
                                     </div>
 
                                 </form>
+                                <!-- End form -->
                             </div>
                             <div class="card-footer text-center">
                                 <div class="small"><a href="{% url 'users:registration' %}">Нужен аккаунт?
