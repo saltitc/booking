@@ -1,6 +1,11 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
-from .models import User
+from django.core.exceptions import ValidationError
+
+from .models import User, EmailVerification
 from django import forms
+import uuid
+from datetime import timedelta
+from django.utils.timezone import now
 
 
 class UserLoginForm(AuthenticationForm):
@@ -47,6 +52,19 @@ class UserRegistrationForm(UserCreationForm):
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'class': 'form-control py-4',
         'placeholder': "Подтвердите пароль"}))
+
+    def save(self, commit=True):
+        user = super().save(commit=True)
+        expiration = now() + timedelta(hours=48)
+        verification = EmailVerification.objects.create(code=uuid.uuid4(), user=user, expiration=expiration)
+        verification.send_verification_email()
+        return user
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exists():
+            raise ValidationError("Email exists")
+        return self.cleaned_data
 
 
 class UserProfileForm(UserChangeForm):
