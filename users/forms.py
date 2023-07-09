@@ -60,12 +60,6 @@ class UserRegistrationForm(UserCreationForm):
         verification.send_verification_email()
         return user
 
-    def clean(self):
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
-            raise ValidationError("Email exists")
-        return self.cleaned_data
-
 
 class UserProfileForm(UserChangeForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
