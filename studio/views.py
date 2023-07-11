@@ -10,6 +10,7 @@ from .forms import AppointmentForm
 import datetime
 from django.shortcuts import HttpResponseRedirect
 import uuid
+from .tasks import send_email_confirmation
 
 
 class HomeTemplateView(TitleMixin, TemplateView):
@@ -75,15 +76,7 @@ class ManageAppointmentsListView(TitleMixin, ListView):
             time=request.POST.get('time')
         )
 
-        # creates an AppointmentConfirmation object
-        confirmation = AppointmentConfirmation.objects.create(
-            code=uuid.uuid4(),  # generates a unique code for the verification link
-            appointment=appointment,  # appointment object for which the link will be created
-            expiration=appointment.date  # link expiration date
-        )
-
-        # sends a message to the user's mail with a link to confirm an appointment
-        confirmation.send_confirmation_email()
+        send_email_confirmation.delay(appointment.id)
 
         # shows a message that the user has been enrolled successfully
         messages.add_message(request, messages.SUCCESS, f"{appointment} записан")
