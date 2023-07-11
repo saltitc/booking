@@ -50,7 +50,7 @@ class Feedback(models.Model):
         average = sum(count * rating for rating, count in enumerate(rating_counts_1, 1))
 
         return {
-            'average': average / feedback_count,
+            'average': round(average / feedback_count, 1),
             'percents': reversed([{'stars': rating, 'percent': round(count // one_percent)}
                                   for rating, count in enumerate(rating_counts_2, 1)]),
         }
