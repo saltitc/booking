@@ -1,12 +1,16 @@
-from django.db import models
-from django.core.validators import EmailValidator, RegexValidator, MinLengthValidator
-from django.template.loader import get_template
-from django.core.mail import EmailMessage
 import datetime
-from django.urls import reverse
+
 from django.conf import settings
+from django.core.mail import EmailMessage
+from django.core.validators import (EmailValidator, MinLengthValidator,
+                                    RegexValidator)
+from django.db import models
+from django.template.loader import get_template
+from django.urls import reverse
 from django.utils.timezone import now
+
 from users.models import User
+
 
 class Appointment(models.Model):
     """
@@ -116,7 +120,7 @@ class AppointmentConfirmation(models.Model):
 
         # create and send email
         email = EmailMessage(
-            subject=f'Подтверждение записи',
+            subject='Подтверждение записи',
             body=message,
             from_email=f'Студия <{settings.EMAIL_HOST_USER}>',
             to=[self.appointment.email]

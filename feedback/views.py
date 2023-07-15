@@ -1,13 +1,13 @@
+from django.contrib import messages
 from django.db.models import QuerySet
-from django.shortcuts import get_object_or_404
-from django.views.generic.edit import FormView, DeleteView
+from django.urls import reverse_lazy
+from django.views.generic.edit import DeleteView, FormView
 from django.views.generic.list import ListView
 
-from .models import Feedback
-from .forms import FeedbackForm
-from django.urls import reverse_lazy, reverse
-from django.contrib import messages
 from common.views import TitleMixin
+
+from .forms import FeedbackForm
+from .models import Feedback
 
 
 class FeedbackListView(TitleMixin, ListView):
@@ -67,6 +67,8 @@ class FeedbackFormView(TitleMixin, FormView):
 
 
 class FeedbackDeleteView(DeleteView):
+    """
+    Removes the feedback object from the database
+    """
     model = Feedback
     success_url = reverse_lazy('feedback:feedback_list')
-

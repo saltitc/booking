@@ -1,8 +1,9 @@
-from django.urls import path
 from django.contrib.auth.decorators import login_required
+from django.urls import path
 
-from studio.views import (HomeTemplateView, AppointmentFormView, ManageAppointmentsListView,
-                          AppointmentConfirmationView, AppointmentDeleteView)
+from studio.views import (AppointmentConfirmationView, AppointmentDeleteView,
+                          AppointmentFormView, HomeTemplateView,
+                          ManageAppointmentsListView)
 
 app_name = 'studio'
 

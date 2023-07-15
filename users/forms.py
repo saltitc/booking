@@ -1,8 +1,10 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
+from django import forms
+from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
+                                       UserCreationForm)
+
+from users.tasks import send_email_verification
 
 from .models import User
-from django import forms
-from users.tasks import send_email_verification
 
 
 class UserLoginForm(AuthenticationForm):
@@ -52,6 +54,7 @@ class UserRegistrationForm(UserCreationForm):
 
     def save(self, commit=True):
         user = super().save(commit=True)
+        # creating a task for celery
         send_email_verification.delay(user.id)
         return user
 

@@ -1,8 +1,8 @@
 from django.conf import settings
-from django.core.mail import send_mail
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.mail import send_mail
 from django.core.validators import RegexValidator
+from django.db import models
 from django.urls import reverse
 from django.utils.timezone import now
 
@@ -39,17 +39,20 @@ class EmailVerification(models.Model):
         return f"Подтверждение почты для пользователя {self.user.email}"
 
     def send_verification_email(self):
+        # generates a verification link
         link = reverse('users:email_verification', kwargs={'email': self.user.email, 'code': self.code})
         verification_link = f'{settings.DOMAIN_NAME}{link}'
+
         subject = f'Подтверждение учетной записи для {self.user.username}'
         message = 'Для подтверждения учетной записи для {} перейдите по ссылке {}'.format(
             self.user.email,
             verification_link
         )
+        # send email
         send_mail(
             subject=subject,
             message=message,
-            from_email=settings.EMAIL_HOST_USER,
+            from_email=f'Студия <{settings.EMAIL_HOST_USER}>',
             recipient_list=[self.user.email],
             fail_silently=False,
         )

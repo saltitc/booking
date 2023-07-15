@@ -1,7 +1,9 @@
-from django.db import models
-from django.core.validators import EmailValidator, MinLengthValidator
-from users.models import User
 from itertools import tee
+
+from django.core.validators import EmailValidator, MinLengthValidator
+from django.db import models
+
+from users.models import User
 
 
 class Feedback(models.Model):
@@ -32,7 +34,12 @@ class Feedback(models.Model):
         return f'{self.first_name} {self.last_name}'
 
     @classmethod
-    def get_percents(cls):
+    def get_percents(cls) -> dict[str, int | list[dict]]:
+        """
+        Returns the average rating of the reviews and
+        the percentage of the total number of reviews for each rating
+        """
+        # count of reviews
         feedback_count = Feedback.objects.all().count()
 
         if feedback_count == 0:
@@ -43,14 +50,17 @@ class Feedback(models.Model):
 
         one_percent = feedback_count / 100
 
+        # 2 iterators that contain the number of reviews for each rating
         rating_counts_1, rating_counts_2 = tee(
             (Feedback.objects.filter(rating=rating).count() for rating in range(1, 6)),
             2
         )
-        average = sum(count * rating for rating, count in enumerate(rating_counts_1, 1))
+        # the sum of the number of reviews of each rating
+        rating_sum = sum(count * rating for rating, count in enumerate(rating_counts_1, 1))
 
         return {
-            'average': round(average / feedback_count, 1),
+            'average': round(rating_sum / feedback_count, 1),
+            # percentage for each rating of the total number of reviews
             'percents': reversed([{'stars': rating, 'percent': round(count // one_percent)}
                                   for rating, count in enumerate(rating_counts_2, 1)]),
         }

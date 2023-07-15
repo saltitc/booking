@@ -1,5 +1,7 @@
-from celery import shared_task
 import uuid
+
+from celery import shared_task
+
 from studio.models import Appointment, AppointmentConfirmation
 
 

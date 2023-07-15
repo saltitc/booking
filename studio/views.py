@@ -1,15 +1,17 @@
-from django.db.models import QuerySet
-from django.views.generic.base import TemplateView
-from django.urls import reverse_lazy, reverse
-from django.contrib import messages
-from .models import Appointment, AppointmentConfirmation
-from django.views.generic import ListView
-from django.views.generic.edit import FormView, DeleteView
-from common.views import TitleMixin
-from .forms import AppointmentForm
 import datetime
+
+from django.contrib import messages
+from django.db.models import QuerySet
 from django.shortcuts import HttpResponseRedirect
-import uuid
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import DeleteView, FormView
+
+from common.views import TitleMixin
+
+from .forms import AppointmentForm
+from .models import Appointment, AppointmentConfirmation
 from .tasks import send_email_confirmation
 
 
@@ -76,6 +78,7 @@ class ManageAppointmentsListView(TitleMixin, ListView):
             time=request.POST.get('time')
         )
 
+        # creating a task for celery
         send_email_confirmation.delay(appointment.id)
 
         # shows a message that the user has been enrolled successfully
@@ -131,6 +134,9 @@ class AppointmentConfirmationView(TitleMixin, TemplateView):
 
 
 class AppointmentDeleteView(DeleteView):
+    """
+    DeleteView to delete an appointment
+    """
     model = Appointment
 
     def get_success_url(self):
