@@ -1,39 +1,5 @@
 # Booking django project
 
-## Project description
-
-This project is a website written in the django framework. The frontend is made with bootstrap. 
-This is a site for a music studio which consists of several sections: 
-1. **Main page**. It contains a button for booking an application for a service, staff, types of services, location and contact information.
-2. **Reviews**. Contains statistics with user ratings with a chart, there is also a "make a review" button for authorized users.
-3. **Profile**. Contains the user's personal data that can be edited and an avatar that can be uploaded or changed.
-A list of active requests with their status and the possibility of cancellation is also displayed.
-5. For the administration, there is a tab with the **administration of applications**, where all user applications are displayed.
-For each application, you can select the date and time of the appointment and accept the booking, after which a message will be sent to the user's mail with a notification of the appointed date.
-
-During the development of this project, I'm:
-1. Improved understanding of django framework
-2. Learned to work with user authentication and authorization
-3. Learned to work with bootstrap
-4. Discovered celery and redis
-5. Deeper understanding of forms
-6. Learned to work with sending messages and mail verification
-7. Used mixins
-8. Learned how the admin panel works in django
-From the main it's all
-
-## What does the site look like
-
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/cad41bce-6948-44cb-bde9-c7ababe25029">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/ab78467c-d9c5-4afc-a45b-cfef8479ce5f">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/8850cee8-12a9-44d2-be85-0a8d1098dafe">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/460903c1-d3a0-45b7-8c06-26e9971f7530">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/69b07669-d601-47a8-a96c-27674ee694b7">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/0ad93897-2cb0-4563-b8f1-0d53a624dbe3">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/02925e35-68c8-4aed-9ab7-1091e1c57535">
-<img width="425" alt="image" src="https://github.com/saltitc/booking/assets/114296895/1425b1e2-9d02-4075-a1c5-57231c5dbf08">
-
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
